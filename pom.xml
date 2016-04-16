@@ -12,7 +12,7 @@
         <spring.version>3.2.0.RELEASE</spring.version>
         <spring-data.version>1.2.0.RELEASE</spring-data.version>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -98,5 +98,15 @@
     </dependencies>
     <build>
         <finalName>assistant-core</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <warSourceExcludes>src/main/resources/**</warSourceExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
