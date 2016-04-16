@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.assistant.db.dao.CommonMapper">
+    <resultMap id="BaseResultMap" type="com.assistant.db.model.Common">
+        <result column="nowDt" property="nowDt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getDBDate" resultMap="BaseResultMap">
+        select now() as nowDt;
+    </select>
+</mapper>
