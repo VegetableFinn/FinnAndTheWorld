@@ -12,6 +12,7 @@ import com.assistant.db.model.OneApp;
 import com.assistant.models.enums.ErrorMessageEnum;
 import com.assistant.models.oneApps.OneAppJson;
 import com.assistant.models.result.BaseServiceResult;
+import com.assistant.service.FileService;
 import com.assistant.service.OneAppService;
 import com.assistant.utils.HttpRequestUtil;
 import com.assistant.utils.ResultHelper;
@@ -26,7 +27,10 @@ import com.assistant.utils.convertor.OneAppConvertor;
 public class OneAppServiceImpl extends BaseService implements OneAppService {
 
     @Autowired
-    private OneAppMapper oneAppMapper;
+    protected OneAppMapper oneAppMapper;
+
+    @Autowired
+    protected FileService  fileService;
 
     @Override
     public List<OneApp> selectByAll() {
@@ -50,13 +54,20 @@ public class OneAppServiceImpl extends BaseService implements OneAppService {
             OneApp one = getLastOneFromWeb();
             Assert.notNull(one);
 
-            //4.幂等
+            //4.下载ONE图片
+            BaseServiceResult downloadResult = fileService.downloadOnePic(one);
+            if (!downloadResult.isSuccess()) {
+                logger.error("更新ONE时,下载图片失败." + one);
+                throw new RuntimeException("更新ONE时,下载图片失败." + one);
+            }
+
+            //5.幂等
             if (StringUtil.equals(oneApp.getContent(), one.getContent())) {
                 logger.info("ONE更新时幂等.[" + one + "]");
                 return result;
             }
 
-            //5.保存
+            //6.保存
             oneAppMapper.insert(one);
         } catch (Exception e) {
             logger.error("更新ONE失败.", e);
@@ -65,6 +76,22 @@ public class OneAppServiceImpl extends BaseService implements OneAppService {
 
         logger.info("ONE检查结束.");
 
+        return result;
+    }
+
+    @Override
+    public BaseServiceResult downloadHistoryPics() {
+        BaseServiceResult result = new BaseServiceResult();
+
+        List<OneApp> oneApps = oneAppMapper.selectAll();
+        for (OneApp one : oneApps) {
+            BaseServiceResult downloadResult = fileService.downloadOnePic(one);
+            if (!downloadResult.isSuccess()) {
+                logger.error("更新ONE时,下载图片失败." + one);
+            } else {
+                oneAppMapper.updateByPrimaryKey(one);
+            }
+        }
         return result;
     }
 

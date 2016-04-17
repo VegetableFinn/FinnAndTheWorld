@@ -19,6 +19,8 @@ public class OneApp {
 
     private String  content;
 
+    private String  imgAddr;
+
     public Integer getId() {
         return id;
     }
@@ -83,6 +85,25 @@ public class OneApp {
         this.content = content == null ? null : content.trim();
     }
 
+    /**
+     * Getter method for property <tt>imgAddr</tt>.
+     *
+     * @return property value of imgAddr
+     */
+
+    public String getImgAddr() {
+        return imgAddr;
+    }
+
+    /**
+     * Setter method for property <tt>imgAddr</tt>.
+     *
+     * @param imgAddr value to be assigned to property imgAddr
+     */
+    public void setImgAddr(String imgAddr) {
+        this.imgAddr = imgAddr;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("OneApp{");
@@ -94,6 +115,7 @@ public class OneApp {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", content='").append(content).append('\'');
+        sb.append(", imgAddr='").append(imgAddr).append('\'');
         sb.append('}');
         return sb.toString();
     }

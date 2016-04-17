@@ -23,4 +23,9 @@ public interface OneAppService {
      */
     BaseServiceResult checkForNewOne();
 
+    /**
+     * 下载所有历史图片
+     * @return
+     */
+    BaseServiceResult downloadHistoryPics();
 }

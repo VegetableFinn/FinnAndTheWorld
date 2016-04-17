@@ -15,13 +15,10 @@ import com.assistant.service.CommonService;
 public class BaseService {
 
     /** logger */
-    protected static Logger logger      = Logger.getLogger(BaseService.class);
-
-    /** errorlogger */
-    protected static Logger errorLogger = Logger.getLogger("errorlogger");
+    protected static Logger logger = Logger.getLogger(BaseService.class);
 
     @Autowired
-    private CommonService   commonService;
+    protected CommonService commonService;
 
     //~~~父类方法
 

@@ -31,8 +31,13 @@ public class OneAppController {
         return oneApps;
     }
 
-    @RequestMapping("/date")
-    public @ResponseBody Object getDate() {
+    @RequestMapping("/downloadHistoryPics")
+    public @ResponseBody Object downloadHistoryPics() {
+        return oneAppService.downloadHistoryPics();
+    }
+
+    @RequestMapping("/checkForNewOne")
+    public @ResponseBody Object checkForNewOne() {
         return oneAppService.checkForNewOne();
     }
 }

@@ -9,12 +9,13 @@
         <result column="hp_makettime" property="hpMakettime" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="img_addr" property="imgAddr" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.assistant.db.model.OneApp" extends="BaseResultMap">
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, img_url, author, hp_makettime, gmt_create, gmt_modified
+    id, title, img_url, author, hp_makettime, gmt_create, gmt_modified, img_addr
   </sql>
     <sql id="Blob_Column_List">
     content
@@ -54,10 +55,10 @@
     <insert id="insert" parameterType="com.assistant.db.model.OneApp">
     insert into one_app (id, title, img_url,
       author, hp_makettime, gmt_create,
-      gmt_modified, content)
+      gmt_modified, content, img_addr)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR},
       #{author,jdbcType=VARCHAR}, #{hpMakettime,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
-      #{gmtModified,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+      #{gmtModified,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}, #{imgAddr,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.assistant.db.model.OneApp">
         insert into one_app
@@ -86,6 +87,9 @@
             <if test="content != null">
                 content,
             </if>
+            <if test="imgAddr != null">
+                img_addr,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -111,6 +115,9 @@
             </if>
             <if test="content != null">
                 #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="imgAddr != null">
+                #{imgAddr,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -138,6 +145,9 @@
             <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR},
             </if>
+            <if test="imgAddr != null">
+                img_addr = #{imgUrl,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -149,7 +159,8 @@
       hp_makettime = #{hpMakettime,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
+      content = #{content,jdbcType=LONGVARCHAR},
+      img_addr = #{imgAddr,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <update id="updateByPrimaryKey" parameterType="com.assistant.db.model.OneApp">
@@ -159,7 +170,9 @@
       author = #{author,jdbcType=VARCHAR},
       hp_makettime = #{hpMakettime,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR},
+      img_addr = #{imgAddr,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
