@@ -9,8 +9,8 @@
 </head>
 <body>
 <div id="react-content"></div>
-aaa
 </body>
+<script src="/js/jquery.min.js"></script>
 <!-- 引入公用文件 -->
 <script src="/js/common.js"></script>
 <!-- 引入入口文件 -->

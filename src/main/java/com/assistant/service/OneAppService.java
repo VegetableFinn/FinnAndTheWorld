@@ -28,4 +28,10 @@ public interface OneAppService {
      * @return
      */
     BaseServiceResult downloadHistoryPics();
+
+    /**
+     * 获得最新记录
+     * @return
+     */
+    OneApp selectLastOne();
 }

@@ -95,6 +95,11 @@ public class OneAppServiceImpl extends BaseService implements OneAppService {
         return result;
     }
 
+    @Override
+    public OneApp selectLastOne() {
+        return oneAppMapper.selectLastOne();
+    }
+
     /**
      * 从官网获取最新记录
      * @return

@@ -3,6 +3,7 @@ package com.assistant.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.assistant.service.CommonService;
 import com.assistant.service.OneAppService;
@@ -13,7 +14,7 @@ import com.assistant.service.OneAppService;
  */
 @Controller
 @RequestMapping("/one")
-public class OneAppController {
+public class OneAppController extends BaseController {
 
     @Autowired
     private OneAppService oneAppService;
@@ -35,5 +36,10 @@ public class OneAppController {
     //    public @ResponseBody Object checkForNewOne() {
     //        return oneAppService.checkForNewOne();
     //    }
+
+    @RequestMapping("/getLastOne.json")
+    public @ResponseBody Object getLastOne() {
+        return oneAppService.selectLastOne();
+    }
 
 }
