@@ -1,6 +1,7 @@
 package com.assistant.service.schedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.assistant.models.result.BaseServiceResult;
@@ -20,6 +21,7 @@ public class OneAppSchdule extends BaseService {
     /**
      * ONE更新调度
      */
+    @Scheduled(cron = "0 0 0,12 * * ?")
     public void updateOneApp() {
 
         logger.info("开始调度执行更新ONE.");
