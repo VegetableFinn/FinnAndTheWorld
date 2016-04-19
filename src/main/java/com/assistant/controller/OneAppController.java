@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.assistant.service.CommonService;
 import com.assistant.service.OneAppService;
+import com.assistant.utils.FileUtil;
 
 /**
  * @author hefan.hf
@@ -54,7 +55,7 @@ public class OneAppController extends BaseController {
     @ResponseBody
     public void showImage(HttpServletRequest re, HttpServletResponse response, String title) {
 
-        String pic_addr = ONE_PIC_PATH + title + ".jpg";
+        String pic_addr = FileUtil.getOnePicFolder() + title + ".jpg";
 
         File file = new File(pic_addr);
         if (!file.exists()) {

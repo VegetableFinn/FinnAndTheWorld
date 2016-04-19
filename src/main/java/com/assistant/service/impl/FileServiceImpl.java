@@ -14,6 +14,7 @@ import com.assistant.db.model.OneApp;
 import com.assistant.models.enums.ErrorMessageEnum;
 import com.assistant.models.result.BaseServiceResult;
 import com.assistant.service.FileService;
+import com.assistant.utils.FileUtil;
 import com.assistant.utils.ResultHelper;
 
 /**
@@ -23,15 +24,12 @@ import com.assistant.utils.ResultHelper;
 @Service("fileService")
 public class FileServiceImpl extends BaseService implements FileService {
 
-    /** ONE图片保存目录 */
-    private static final String DOWNLOAD_PATH = "/root/files/ones/";
-
     @Override
     public BaseServiceResult downloadOnePic(OneApp one) {
 
         BaseServiceResult result = new BaseServiceResult();
 
-        String filePath = DOWNLOAD_PATH + one.getTitle() + ".jpg";
+        String filePath = FileUtil.getOnePicFolder() + one.getTitle() + ".jpg";
         one.setImgAddr(filePath);
         logger.debug(filePath);
 
