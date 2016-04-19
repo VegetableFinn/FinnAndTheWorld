@@ -49,7 +49,7 @@ public class OneAppController extends BaseController {
         return oneAppService.selectLastOne();
     }
 
-    @RequestMapping("/showOneImage.json")
+    @RequestMapping("/showImage.json")
     @ResponseBody
     public void showImage(HttpServletRequest re, HttpServletResponse response, String title) {
 
