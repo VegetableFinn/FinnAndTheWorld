@@ -1,5 +1,6 @@
 package com.assistant.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -53,10 +54,13 @@ public class OneAppController extends BaseController {
     @ResponseBody
     public void showImage(HttpServletRequest re, HttpServletResponse response, String title) {
 
-        //        pic_addr = "/Users/hefan/Data/apache-tomcat-7.0.68/webapps/examples/jsp/jsp2/jspx/textRotate.jpg";
-        //response.setContentType("text/html; charset=UTF-8");
-
         String pic_addr = ONE_PIC_PATH + title + ".jpg";
+
+        File file = new File(pic_addr);
+        if (!file.exists()) {
+            logger.error("显示加载ONE图片时,图片不存在!" + pic_addr);
+            return;
+        }
 
         response.setContentType("image/*");
         FileInputStream fis = null;
@@ -71,12 +75,14 @@ public class OneAppController extends BaseController {
                 os.flush();
             }
         } catch (Exception e) {
+            logger.error("显示加载ONE图片时出错:", e);
             e.printStackTrace();
         } finally {
             try {
                 fis.close();
                 os.close();
             } catch (IOException e) {
+                logger.error("显示加载ONE图片,关闭链接时出错:", e);
                 e.printStackTrace();
             }
         }
