@@ -40,10 +40,10 @@ public class OneAppController extends BaseController {
     //        return oneAppService.downloadHistoryPics();
     //    }
     //
-    //    @RequestMapping("/checkForNewOne")
-    //    public @ResponseBody Object checkForNewOne() {
-    //        return oneAppService.checkForNewOne();
-    //    }
+    @RequestMapping("/checkForNewOne")
+    public @ResponseBody Object checkForNewOne() {
+        return oneAppService.checkForNewOne();
+    }
 
     @RequestMapping("/getLastOne.json")
     public @ResponseBody Object getLastOne() {
