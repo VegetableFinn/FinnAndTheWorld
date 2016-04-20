@@ -10,7 +10,10 @@ public enum ErrorMessageEnum {
     SUCCESS("SUCCESS", "执行成功"),
 
     /** 系统异常 */
-    UNKNOWN_EXCEPTION("UNKNOWN_EXCEPTION", "系统异常"), ;
+    UNKNOWN_EXCEPTION("UNKNOWN_EXCEPTION", "系统异常"),
+
+    /** 登录失败 */
+    LOGIN_FAIL("LOGIN_FAIL", "登录失败"),
 
     ;
 
