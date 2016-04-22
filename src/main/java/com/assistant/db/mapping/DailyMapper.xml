@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.assistant.db.dao.DailyMapper">
+    <resultMap id="BaseResultMap" type="com.assistant.db.model.Daily">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="start_dt" property="startDt" jdbcType="TIMESTAMP"/>
+        <result column="end_dt" property="endDt" jdbcType="TIMESTAMP"/>
+        <result column="is_duration" property="isDuration" jdbcType="CHAR"/>
+        <result column="catagory" property="catagory" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, content, start_dt, end_dt, is_duration, catagory, gmt_create, gmt_modified
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from daily
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectRecent2DaysDesc" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from daily
+        where to_days(now()) - to_days(start_dt) &lt;= 1
+        order by start_dt desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from daily
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.assistant.db.model.Daily">
+    insert into daily (id, content, start_dt,
+      end_dt, is_duration, catagory,
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{startDt,jdbcType=TIMESTAMP},
+      #{endDt,jdbcType=TIMESTAMP}, #{isDuration,jdbcType=CHAR}, #{catagory,jdbcType=VARCHAR},
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.assistant.db.model.Daily">
+        insert into daily
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="startDt != null">
+                start_dt,
+            </if>
+            <if test="endDt != null">
+                end_dt,
+            </if>
+            <if test="isDuration != null">
+                is_duration,
+            </if>
+            <if test="catagory != null">
+                catagory,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="startDt != null">
+                #{startDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDt != null">
+                #{endDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDuration != null">
+                #{isDuration,jdbcType=CHAR},
+            </if>
+            <if test="catagory != null">
+                #{catagory,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.assistant.db.model.Daily">
+        update daily
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="startDt != null">
+                start_dt = #{startDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDt != null">
+                end_dt = #{endDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDuration != null">
+                is_duration = #{isDuration,jdbcType=CHAR},
+            </if>
+            <if test="catagory != null">
+                catagory = #{catagory,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.assistant.db.model.Daily">
+    update daily
+    set content = #{content,jdbcType=VARCHAR},
+      start_dt = #{startDt,jdbcType=TIMESTAMP},
+      end_dt = #{endDt,jdbcType=TIMESTAMP},
+      is_duration = #{isDuration,jdbcType=CHAR},
+      catagory = #{catagory,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="endById" parameterType="java.lang.Integer">
+        update daily
+        set
+        end_dt = now(),
+        gmt_modified = now()
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
