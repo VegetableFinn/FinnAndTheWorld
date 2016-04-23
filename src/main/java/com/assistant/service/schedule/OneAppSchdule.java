@@ -27,7 +27,7 @@ public class OneAppSchdule extends BaseService {
         logger.info("开始调度执行更新ONE.");
         BaseServiceResult result = oneAppService.checkForNewOne();
         if (!result.isSuccess()) {
-            logger.error("调度执行ONE更新失败.失败信息:" + result.getErrorMessageEnum().getDescription());
+            logger.error("调度执行ONE更新失败.失败信息:" + result.getErrorMessageEnum());
         }
         logger.info("调度结束.");
 

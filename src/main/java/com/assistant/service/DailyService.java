@@ -1,8 +1,7 @@
 package com.assistant.service;
 
-import java.util.List;
-
-import com.assistant.models.daily.DailyModel;
+import com.assistant.models.result.BaseServiceResult;
+import com.assistant.models.result.DailyQueryResult;
 
 /**
  * @author hefan.hf
@@ -10,10 +9,10 @@ import com.assistant.models.daily.DailyModel;
  */
 public interface DailyService {
 
-    List<DailyModel> getRecentTwoDaysOrderByDt();
+    DailyQueryResult getRecentTwoDaysOrderByDt();
 
-    int endById(int id);
+    BaseServiceResult endById(int id);
 
-    void addDaily(String type, String isDuration, String content);
+    BaseServiceResult addDaily(String type, String isDuration, String content);
 
 }

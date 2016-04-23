@@ -18,14 +18,14 @@ public class BaseServiceResult implements Serializable {
     private boolean           success;
 
     /** 错误描述 */
-    private ErrorMessageEnum  errorMessageEnum;
+    private String            errorMessageEnum;
 
     /**
      * 默认构造函数
      */
     public BaseServiceResult() {
         this.success = true;
-        this.errorMessageEnum = ErrorMessageEnum.SUCCESS;
+        this.errorMessageEnum = ErrorMessageEnum.SUCCESS.getCode();
     }
 
     /**
@@ -53,7 +53,7 @@ public class BaseServiceResult implements Serializable {
      * @return property value of errorMessageEnum
      */
 
-    public ErrorMessageEnum getErrorMessageEnum() {
+    public String getErrorMessageEnum() {
         return errorMessageEnum;
     }
 
@@ -62,7 +62,7 @@ public class BaseServiceResult implements Serializable {
      *
      * @param errorMessageEnum value to be assigned to property errorMessageEnum
      */
-    public void setErrorMessageEnum(ErrorMessageEnum errorMessageEnum) {
+    public void setErrorMessageEnum(String errorMessageEnum) {
         this.errorMessageEnum = errorMessageEnum;
     }
 }

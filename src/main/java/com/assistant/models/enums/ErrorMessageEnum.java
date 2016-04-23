@@ -15,6 +15,9 @@ public enum ErrorMessageEnum {
     /** 登录失败 */
     LOGIN_FAIL("LOGIN_FAIL", "登录失败"),
 
+    /** 未登录 */
+    LOGIN_REQUIRED("LOGIN_REQUIRED", "未登录"),
+
     ;
 
     /**

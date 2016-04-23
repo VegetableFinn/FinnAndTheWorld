@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.assistant.db.dao.DailyMapper;
 import com.assistant.db.model.Daily;
 import com.assistant.models.daily.DailyModel;
+import com.assistant.models.result.BaseServiceResult;
+import com.assistant.models.result.DailyQueryResult;
 import com.assistant.service.DailyService;
 import com.assistant.utils.convertor.DailyConvertor;
 
@@ -27,22 +29,29 @@ public class DailyServiceImpl extends BaseService implements DailyService {
     private DailyMapper dailyMapper;
 
     @Override
-    public List<DailyModel> getRecentTwoDaysOrderByDt() {
+    public DailyQueryResult getRecentTwoDaysOrderByDt() {
+        DailyQueryResult result = new DailyQueryResult();
         List<Daily> dailies = dailyMapper.selectRecent2DaysDesc();
-        return DailyConvertor.convertToModels(dailies);
+        List<DailyModel> dailyModels = DailyConvertor.convertToModels(dailies);
+        result.setDailyModels(dailyModels);
+        return result;
     }
 
     @Override
-    public int endById(int id) {
+    public BaseServiceResult endById(int id) {
+        BaseServiceResult result = new BaseServiceResult();
         Date now = commonService.getSysDate();
         Daily daily = dailyMapper.selectByPrimaryKey(id);
         daily.setEndDt(now);
         daily.setGmtModified(now);
-        return dailyMapper.updateByPrimaryKey(daily);
+        dailyMapper.updateByPrimaryKey(daily);
+        return result;
     }
 
     @Override
-    public void addDaily(String type, String isDuration, String content) {
+    public BaseServiceResult addDaily(String type, String isDuration, String content) {
+
+        BaseServiceResult result = new BaseServiceResult();
 
         Date now = commonService.getSysDate();
 
@@ -55,5 +64,7 @@ public class DailyServiceImpl extends BaseService implements DailyService {
         daily.setStartDt(now);
 
         dailyMapper.insert(daily);
+
+        return result;
     }
 }

@@ -1,5 +1,8 @@
 package com.assistant.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,13 +37,14 @@ public class MainController extends BaseController {
     //    }
 
     @RequestMapping(value = "/login")
-    public @ResponseBody BaseServiceResult login(String loginAccount) {
+    public @ResponseBody BaseServiceResult login(HttpServletRequest re,
+                                                 HttpServletResponse response, String loginAccount) {
         BaseServiceResult result = new BaseServiceResult();
         SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
         if (saySomething == null) {
             ResultHelper.fillFailure(result, ErrorMessageEnum.LOGIN_FAIL);
         }
+        re.getSession().setAttribute("user", "user");
         return result;
     }
-
 }

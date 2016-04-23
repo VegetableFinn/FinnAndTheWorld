@@ -36,6 +36,6 @@ public class DateUtil {
         }
         minutes = diff % 60000;
         long hour = diff / 1000 / 60 / 60;
-        return hour + "时" + minutes + "分" + seconds + "秒";
+        return hour + "时" + minutes + "分";
     }
 }

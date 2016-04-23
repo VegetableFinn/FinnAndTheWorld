@@ -16,7 +16,7 @@ public class ResultHelper {
      */
     public static void fillSuccess(BaseServiceResult result) {
         result.setSuccess(true);
-        result.setErrorMessageEnum(ErrorMessageEnum.SUCCESS);
+        result.setErrorMessageEnum(ErrorMessageEnum.SUCCESS.getCode());
     }
 
     /**
@@ -26,7 +26,7 @@ public class ResultHelper {
      */
     public static void fillFailure(BaseServiceResult result, ErrorMessageEnum error) {
         result.setSuccess(false);
-        result.setErrorMessageEnum(error);
+        result.setErrorMessageEnum(error.getCode());
     }
 
 }
