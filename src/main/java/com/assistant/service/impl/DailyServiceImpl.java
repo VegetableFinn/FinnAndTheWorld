@@ -67,4 +67,16 @@ public class DailyServiceImpl extends BaseService implements DailyService {
 
         return result;
     }
+
+    @Override
+    public BaseServiceResult editDaily(String type, String content, int id) {
+        BaseServiceResult result = new BaseServiceResult();
+        Date now = commonService.getSysDate();
+        Daily daily = dailyMapper.selectByPrimaryKey(id);
+        daily.setGmtModified(now);
+        daily.setCatagory(type);
+        daily.setContent(content);
+        dailyMapper.updateByPrimaryKey(daily);
+        return result;
+    }
 }

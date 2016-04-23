@@ -35,4 +35,9 @@ public class DailyController extends BaseController {
         return dailyService.addDaily(type, isDuration, content);
     }
 
+    @RequestMapping("/editDaily")
+    public @ResponseBody BaseServiceResult editDaily(String type, String content, int id) {
+        return dailyService.editDaily(type, content, id);
+    }
+
 }

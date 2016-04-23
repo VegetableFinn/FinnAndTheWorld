@@ -15,4 +15,5 @@ public interface DailyService {
 
     BaseServiceResult addDaily(String type, String isDuration, String content);
 
+    BaseServiceResult editDaily(String type, String content, int id);
 }
