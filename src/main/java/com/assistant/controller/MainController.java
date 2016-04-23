@@ -1,7 +1,5 @@
 package com.assistant.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +34,7 @@ public class MainController extends BaseController {
     //    }
 
     @RequestMapping(value = "/login")
-    public @ResponseBody BaseServiceResult login(String loginAccount)
-                                                                     throws UnsupportedEncodingException {
-        loginAccount = new String(loginAccount.getBytes("ISO-8859-1"), "UTF-8");
+    public @ResponseBody BaseServiceResult login(String loginAccount) {
         BaseServiceResult result = new BaseServiceResult();
         SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
         if (saySomething == null) {
