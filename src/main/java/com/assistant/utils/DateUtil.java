@@ -29,12 +29,12 @@ public class DateUtil {
         if (seconds < 60) {
             return seconds + "秒";
         }
-        seconds = diff % 60;
+        seconds = seconds % 60;
         long minutes = diff / 1000 / 60;
         if (minutes < 60) {
             return minutes + "分" + seconds + "秒";
         }
-        minutes = diff % 60000 / 1000;
+        minutes = minutes % 60000;
         long hour = diff / 1000 / 60 / 60;
         return hour + "时" + minutes + "分";
     }
