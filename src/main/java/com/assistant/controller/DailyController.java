@@ -1,5 +1,7 @@
 package com.assistant.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,9 @@ public class DailyController extends BaseController {
     }
 
     @RequestMapping("/addDaily")
-    public @ResponseBody void addDaily(String type, String isDuration, String content) {
+    public @ResponseBody void addDaily(String type, String isDuration, String content)
+                                                                                      throws UnsupportedEncodingException {
+        content = new String(content.getBytes("ISO-8859-1"), "UTF-8");
         dailyService.addDaily(type, isDuration, content);
     }
 
