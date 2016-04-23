@@ -7,6 +7,7 @@ import java.util.List;
 import com.assistant.db.model.Daily;
 import com.assistant.models.daily.DailyModel;
 import com.assistant.models.enums.TrueFalseEnum;
+import com.assistant.utils.DateUtil;
 
 /**
  * @author hefan.hf
@@ -22,6 +23,7 @@ public class DailyConvertor {
         model.setCatagory(daily.getCatagory());
         if (daily.getEndDt() != null) {
             model.setEndDt(sdf.format(daily.getEndDt()));
+            model.setDurationDt(DateUtil.diff(daily.getStartDt(), daily.getEndDt()));
         }
         model.setId(daily.getId());
         model.setDuration(TrueFalseEnum.getByCode(daily.getIsDuration()).getDescription());

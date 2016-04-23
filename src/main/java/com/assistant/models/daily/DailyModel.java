@@ -17,6 +17,8 @@ public class DailyModel {
 
     private String  catagory;
 
+    private String  durationDt;
+
     /**
      * Getter method for property <tt>id</tt>.
      *
@@ -104,9 +106,9 @@ public class DailyModel {
     }
 
     /**
-     * Setter method for property <tt>isDuration</tt>.
+     * Setter method for property <tt>setDuration</tt>.
      *
-     * @param isDuration value to be assigned to property isDuration
+     * @param duration value to be assigned to property isDuration
      */
     public void setDuration(Boolean duration) {
         isDuration = duration;
@@ -129,5 +131,38 @@ public class DailyModel {
      */
     public void setCatagory(String catagory) {
         this.catagory = catagory;
+    }
+
+    /**
+     * Getter method for property <tt>durationDt</tt>.
+     *
+     * @return property value of durationDt
+     */
+
+    public String getDurationDt() {
+        return durationDt;
+    }
+
+    /**
+     * Setter method for property <tt>durationDt</tt>.
+     *
+     * @param durationDt value to be assigned to property durationDt
+     */
+    public void setDurationDt(String durationDt) {
+        this.durationDt = durationDt;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("DailyModel{");
+        sb.append("id=").append(id);
+        sb.append(", content='").append(content).append('\'');
+        sb.append(", startDt='").append(startDt).append('\'');
+        sb.append(", endDt='").append(endDt).append('\'');
+        sb.append(", isDuration=").append(isDuration);
+        sb.append(", catagory='").append(catagory).append('\'');
+        sb.append(", durationDt='").append(durationDt).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

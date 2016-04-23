@@ -20,4 +20,22 @@ public class DateUtil {
         calendar.add(Calendar.HOUR, 12);
         return calendar.getTime();
     }
+
+    public static String diff(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        long days = diff / (1000 * 60 * 60 * 24);
+
+        long seconds = diff / 1000;
+        if (seconds < 60) {
+            return seconds + "秒";
+        }
+        seconds = diff % 60;
+        long minutes = diff / 1000 / 60;
+        if (minutes < 60) {
+            return minutes + "分" + seconds + "秒";
+        }
+        minutes = diff % 60000;
+        long hour = diff / 1000 / 60 / 60;
+        return hour + "时" + minutes + "分" + seconds + "秒";
+    }
 }
