@@ -19,5 +19,4 @@ public interface DailyMapper {
 
     List<Daily> selectRecent2DaysDesc();
 
-    int endById(int id);
 }

@@ -132,11 +132,4 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <update id="endById" parameterType="java.lang.Integer">
-        update daily
-        set
-        end_dt = now(),
-        gmt_modified = now()
-        where id = #{id,jdbcType=INTEGER}
-    </update>
 </mapper>

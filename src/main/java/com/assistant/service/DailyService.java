@@ -14,4 +14,6 @@ public interface DailyService {
 
     int endById(int id);
 
+    void addDaily(String type, String isDuration, String content);
+
 }

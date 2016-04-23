@@ -4,6 +4,7 @@
  */
 package com.assistant.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,26 @@ public class DailyServiceImpl extends BaseService implements DailyService {
 
     @Override
     public int endById(int id) {
-        return dailyMapper.endById(id);
+        Date now = commonService.getSysDate();
+        Daily daily = dailyMapper.selectByPrimaryKey(id);
+        daily.setEndDt(now);
+        daily.setGmtModified(now);
+        return dailyMapper.updateByPrimaryKey(daily);
+    }
+
+    @Override
+    public void addDaily(String type, String isDuration, String content) {
+
+        Date now = commonService.getSysDate();
+
+        Daily daily = new Daily();
+        daily.setCatagory(type);
+        daily.setContent(content);
+        daily.setIsDuration(isDuration);
+        daily.setGmtCreate(now);
+        daily.setGmtModified(now);
+        daily.setStartDt(now);
+
+        dailyMapper.insert(daily);
     }
 }
