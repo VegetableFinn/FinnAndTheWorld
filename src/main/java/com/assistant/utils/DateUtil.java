@@ -34,7 +34,7 @@ public class DateUtil {
         if (minutes < 60) {
             return minutes + "分" + seconds + "秒";
         }
-        minutes = minutes % 60000;
+        minutes = minutes % 60;
         long hour = diff / 1000 / 60 / 60;
         return hour + "时" + minutes + "分";
     }
