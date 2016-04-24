@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("MM-dd E");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM E");
 
     /**
      * 将GMT时间转换为GMT+8
