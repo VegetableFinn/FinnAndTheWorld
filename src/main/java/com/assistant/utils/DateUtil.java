@@ -1,5 +1,6 @@
 package com.assistant.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,6 +9,8 @@ import java.util.Date;
  * @version $Id: DateUtil, v 0.1 16/4/16 20:13 hefan.hf Exp $
  */
 public class DateUtil {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MM-dd E");
 
     /**
      * 将GMT时间转换为GMT+8
@@ -38,4 +41,9 @@ public class DateUtil {
         long hour = diff / 1000 / 60 / 60;
         return hour + "时" + minutes + "分";
     }
+
+    public static String convertToDoString(Date date) {
+        return sdf.format(date);
+    }
+
 }
