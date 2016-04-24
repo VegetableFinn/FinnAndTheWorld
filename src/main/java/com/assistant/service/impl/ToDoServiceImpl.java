@@ -1,5 +1,6 @@
 package com.assistant.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.assistant.db.dao.ToDoMapper;
 import com.assistant.db.model.ToDo;
+import com.assistant.models.result.BaseServiceResult;
 import com.assistant.models.result.ToDoQueryResult;
 import com.assistant.service.ToDoService;
 import com.assistant.utils.convertor.ToDoConvertor;
@@ -26,6 +28,17 @@ public class ToDoServiceImpl extends BaseService implements ToDoService {
         ToDoQueryResult result = new ToDoQueryResult();
         List<ToDo> toDos = toDoMapper.selectWeek();
         result.setToDoModelList(ToDoConvertor.convertToModelList(toDos));
+        return result;
+    }
+
+    @Override
+    public BaseServiceResult editTodo(int id, String newStatus) {
+        BaseServiceResult result = new BaseServiceResult();
+        ToDo toDo = toDoMapper.selectByPrimaryKey(id);
+        Date now = commonService.getSysDate();
+        toDo.setGmtModified(now);
+        toDo.setIsDone(newStatus);
+        toDoMapper.updateByPrimaryKey(toDo);
         return result;
     }
 }

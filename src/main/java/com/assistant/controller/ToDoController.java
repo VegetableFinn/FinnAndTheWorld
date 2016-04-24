@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.assistant.models.result.BaseServiceResult;
 import com.assistant.models.result.ToDoQueryResult;
 import com.assistant.service.ToDoService;
 
@@ -24,4 +25,8 @@ public class ToDoController {
         return toDOService.selectWeek();
     }
 
+    @RequestMapping("/editTodo")
+    public @ResponseBody BaseServiceResult editTodo(int id, String newStatus) {
+        return toDOService.editTodo(id, newStatus);
+    }
 }

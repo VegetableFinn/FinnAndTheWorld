@@ -7,11 +7,12 @@
         <result column="dt" property="dt" jdbcType="TIMESTAMP"/>
         <result column="catagory" property="catagory" jdbcType="VARCHAR"/>
         <result column="is_done" property="isDone" jdbcType="CHAR"/>
+        <result column="finish_dt" property="finishDt" jdbcType="TIMESTAMP"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, content, dt, catagory, is_done, gmt_create, gmt_modified
+    id, content, dt, catagory, is_done, finish_dt, gmt_create, gmt_modified
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -26,18 +27,17 @@
         where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(dt) or is_done = 'F'
         order by dt asc
     </select>
-
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from to_do
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.assistant.db.model.ToDo">
     insert into to_do (id, content, dt,
-      catagory, is_done, gmt_create,
-      gmt_modified)
+      catagory, is_done, finish_dt,
+      gmt_create, gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{dt,jdbcType=TIMESTAMP},
-      #{catagory,jdbcType=VARCHAR}, #{isDone,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
-      #{gmtModified,jdbcType=TIMESTAMP})
+      #{catagory,jdbcType=VARCHAR}, #{isDone,jdbcType=CHAR}, #{finishDt,jdbcType=TIMESTAMP},
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.assistant.db.model.ToDo">
         insert into to_do
@@ -56,6 +56,9 @@
             </if>
             <if test="isDone != null">
                 is_done,
+            </if>
+            <if test="finishDt != null">
+                finish_dt,
             </if>
             <if test="gmtCreate != null">
                 gmt_create,
@@ -80,6 +83,9 @@
             <if test="isDone != null">
                 #{isDone,jdbcType=CHAR},
             </if>
+            <if test="finishDt != null">
+                #{finishDt,jdbcType=TIMESTAMP},
+            </if>
             <if test="gmtCreate != null">
                 #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
@@ -103,6 +109,9 @@
             <if test="isDone != null">
                 is_done = #{isDone,jdbcType=CHAR},
             </if>
+            <if test="finishDt != null">
+                finish_dt = #{finishDt,jdbcType=TIMESTAMP},
+            </if>
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
@@ -118,6 +127,7 @@
       dt = #{dt,jdbcType=TIMESTAMP},
       catagory = #{catagory,jdbcType=VARCHAR},
       is_done = #{isDone,jdbcType=CHAR},
+      finish_dt = #{finishDt,jdbcType=TIMESTAMP},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

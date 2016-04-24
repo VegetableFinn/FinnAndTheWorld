@@ -59,6 +59,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/daily/*"/>
+            <mvc:mapping path="/todo/*"/>
             <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
             <bean class="com.assistant.service.impl.SpringMVCInterceptor"/>
         </mvc:interceptor>

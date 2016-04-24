@@ -13,6 +13,8 @@ public class ToDo {
 
     private String isDone;
 
+    private Date finishDt;
+
     private Date gmtCreate;
 
     private Date gmtModified;
@@ -55,6 +57,14 @@ public class ToDo {
 
     public void setIsDone(String isDone) {
         this.isDone = isDone == null ? null : isDone.trim();
+    }
+
+    public Date getFinishDt() {
+        return finishDt;
+    }
+
+    public void setFinishDt(Date finishDt) {
+        this.finishDt = finishDt;
     }
 
     public Date getGmtCreate() {
