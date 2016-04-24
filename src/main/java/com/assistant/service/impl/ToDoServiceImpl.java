@@ -11,6 +11,7 @@ import com.assistant.db.model.ToDo;
 import com.assistant.models.result.BaseServiceResult;
 import com.assistant.models.result.ToDoQueryResult;
 import com.assistant.service.ToDoService;
+import com.assistant.utils.StringUtil;
 import com.assistant.utils.convertor.ToDoConvertor;
 
 /**
@@ -38,6 +39,9 @@ public class ToDoServiceImpl extends BaseService implements ToDoService {
         Date now = commonService.getSysDate();
         toDo.setGmtModified(now);
         toDo.setIsDone(newStatus);
+        if (StringUtil.equals("T", newStatus)) {
+            toDo.setFinishDt(now);
+        }
         toDoMapper.updateByPrimaryKey(toDo);
         return result;
     }
