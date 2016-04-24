@@ -35,6 +35,11 @@ public class DailyController extends BaseController {
         return dailyService.addDaily(type, isDuration, content);
     }
 
+    @RequestMapping("/deleteDaily")
+    public @ResponseBody BaseServiceResult deleteDaily(int id) {
+        return dailyService.deleteDaily(id);
+    }
+
     @RequestMapping("/editDaily")
     public @ResponseBody BaseServiceResult editDaily(String type, String content, int id) {
         return dailyService.editDaily(type, content, id);

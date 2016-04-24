@@ -79,4 +79,11 @@ public class DailyServiceImpl extends BaseService implements DailyService {
         dailyMapper.updateByPrimaryKey(daily);
         return result;
     }
+
+    @Override
+    public BaseServiceResult deleteDaily(int id) {
+        BaseServiceResult result = new BaseServiceResult();
+        dailyMapper.deleteByPrimaryKey(id);
+        return result;
+    }
 }
