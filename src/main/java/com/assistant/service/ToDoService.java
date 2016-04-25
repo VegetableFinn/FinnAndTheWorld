@@ -12,4 +12,8 @@ public interface ToDoService {
     ToDoQueryResult selectWeek();
 
     BaseServiceResult editTodo(int id, String newStatus);
+
+    BaseServiceResult addTodo(String content, String catagory, String dt);
+
+    BaseServiceResult deleteTodo(int id);
 }

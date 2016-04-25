@@ -1,5 +1,6 @@
 package com.assistant.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +11,9 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM E");
+    private static SimpleDateFormat sdf  = new SimpleDateFormat("dd/MM E");
+
+    private static SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 将GMT时间转换为GMT+8
@@ -44,6 +47,10 @@ public class DateUtil {
 
     public static String convertToDoString(Date date) {
         return sdf.format(date);
+    }
+
+    public static Date convertFromTodoString(String date) throws ParseException {
+        return sdf.parse(date);
     }
 
 }

@@ -29,4 +29,15 @@ public class ToDoController {
     public @ResponseBody BaseServiceResult editTodo(int id, String newStatus) {
         return toDOService.editTodo(id, newStatus);
     }
+
+    @RequestMapping("/addTodo")
+    public @ResponseBody BaseServiceResult addTodo(String content, String catagory, String dt) {
+        return toDOService.addTodo(content, catagory, dt);
+    }
+
+    @RequestMapping("/deleteTodo")
+    public @ResponseBody BaseServiceResult deleteTodo(int id) {
+        return toDOService.deleteTodo(id);
+    }
+
 }
