@@ -50,7 +50,7 @@ public class DateUtil {
     }
 
     public static Date convertFromTodoString(String date) throws ParseException {
-        return sdf.parse(date);
+        return sdf2.parse(date);
     }
 
 }
