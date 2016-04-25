@@ -25,7 +25,7 @@
         <include refid="Base_Column_List"/>
         from to_do
         where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(dt) or is_done = 'F'
-        order by dt asc
+        order by is_done asc,dt asc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from to_do
