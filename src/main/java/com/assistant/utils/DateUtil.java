@@ -46,6 +46,23 @@ public class DateUtil {
     }
 
     public static String convertToDoString(Date date) {
+        Date now = convertFromGMTToPRC(new Date());
+        long diff = date.getTime() - now.getTime();
+        if (diff > 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int dtDay = calendar.get(Calendar.DAY_OF_YEAR);
+            calendar.setTime(now);
+            int nowDay = calendar.get(Calendar.DAY_OF_YEAR);
+            if (dtDay - nowDay == 0) {
+                return "今天";
+            } else if (dtDay - nowDay == 1) {
+                return "明天";
+            } else if (dtDay - nowDay == 2) {
+                return "后天";
+            }
+        }
+
         return sdf.format(date);
     }
 
