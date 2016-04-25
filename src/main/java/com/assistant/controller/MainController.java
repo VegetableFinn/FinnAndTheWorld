@@ -43,8 +43,9 @@ public class MainController extends BaseController {
         SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
         if (saySomething == null) {
             ResultHelper.fillFailure(result, ErrorMessageEnum.LOGIN_FAIL);
+        } else {
+            re.getSession().setAttribute("user", "user");
         }
-        re.getSession().setAttribute("user", "user");
         return result;
     }
 }
