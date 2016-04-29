@@ -23,7 +23,7 @@ public class DateUtil {
     public static Date convertFromGMTToPRC(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR, 12);
+        //        calendar.add(Calendar.HOUR, 12);
         return calendar.getTime();
     }
 
