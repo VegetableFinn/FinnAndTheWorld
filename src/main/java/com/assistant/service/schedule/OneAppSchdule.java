@@ -21,7 +21,7 @@ public class OneAppSchdule extends BaseService {
     /**
      * ONE更新调度
      */
-    @Scheduled(cron = "0 0 0,12 * * ?")
+    @Scheduled(cron = "0 0 0,8,12,20 * * ?")
     public void updateOneApp() {
 
         logger.info("开始调度执行更新ONE.");
