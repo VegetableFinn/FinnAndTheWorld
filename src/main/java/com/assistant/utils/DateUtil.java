@@ -11,9 +11,13 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    private static SimpleDateFormat sdf  = new SimpleDateFormat("dd/MM E");
+    private static SimpleDateFormat sdf              = new SimpleDateFormat("dd/MM E");
 
-    private static SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static SimpleDateFormat sdf2             = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private static SimpleDateFormat SDF_PLAN_ADD     = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+
+    private static SimpleDateFormat SDF_PLAN_ADD_END = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
 
     /**
      * 将GMT时间转换为GMT+8
@@ -68,6 +72,45 @@ public class DateUtil {
 
     public static Date convertFromTodoString(String date) throws ParseException {
         return sdf2.parse(date);
+    }
+
+    /**
+     * 将Plan类型的添加时的时间字符串,只保留日期,转换成时间格式
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static Date convertFromPlanDtString(String date) throws ParseException {
+        String newDate = date.substring(0, 11) + "00:00:00";
+        return SDF_PLAN_ADD.parse(newDate);
+    }
+
+    /**
+     * 将Plan类型的添加时的时间字符串,只保留日期,转换成时间格式
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static Date convertFromPlanDtStart(Date date) throws ParseException {
+        String dateString = sdf2.format(date);
+        String newDate = dateString.substring(0, 11) + "00:00:00";
+        return sdf2.parse(newDate);
+    }
+
+    /**
+     * 将Plan类型的添加时的时间字符串,只保留日期,转换成时间格式
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static Date convertFromPlanDtEnd(Date date) throws ParseException {
+        String dateString = sdf2.format(date);
+        String newDate = dateString.substring(0, 11) + "23:59:59";
+        return sdf2.parse(newDate);
+    }
+
+    public static String convertToPlanDtString(Date date) {
+        return sdf.format(date);
     }
 
 }

@@ -5,21 +5,23 @@ import java.util.Date;
 public class Plan {
     private Integer id;
 
-    private String content;
-
-    private String period;
+    private String  content;
 
     private Integer total;
 
     private Integer current;
 
-    private String unit;
+    private String  unit;
 
-    private Date gmtCreate;
+    private Date    gmtCreate;
 
-    private Date gmtModified;
+    private Date    gmtModified;
 
-    private String isFinished;
+    private String  isFinished;
+
+    private Date    startDt;
+
+    private Date    endDt;
 
     public Integer getId() {
         return id;
@@ -35,14 +37,6 @@ public class Plan {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period == null ? null : period.trim();
     }
 
     public Integer getTotal() {
@@ -91,5 +85,21 @@ public class Plan {
 
     public void setIsFinished(String isFinished) {
         this.isFinished = isFinished == null ? null : isFinished.trim();
+    }
+
+    public Date getStartDt() {
+        return startDt;
+    }
+
+    public void setStartDt(Date startDt) {
+        this.startDt = startDt;
+    }
+
+    public Date getEndDt() {
+        return endDt;
+    }
+
+    public void setEndDt(Date endDt) {
+        this.endDt = endDt;
     }
 }

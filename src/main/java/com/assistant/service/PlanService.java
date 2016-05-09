@@ -1,6 +1,9 @@
 package com.assistant.service;
 
+import java.util.Date;
+
 import com.assistant.models.result.BaseServiceResult;
+import com.assistant.models.result.PlanQueryResult;
 
 /**
  * @author hefan.hf
@@ -8,6 +11,18 @@ import com.assistant.models.result.BaseServiceResult;
  */
 public interface PlanService {
 
-    BaseServiceResult add(String content, String period, int total, String unit);
+    /**
+     * 新增计划
+     * @param content
+     * @param total
+     * @param unit
+     * @return
+     */
+    BaseServiceResult add(String content, int total, String unit, Date startDt, Date endDt);
 
+    /**
+     * 获取生效计划
+     * @return
+     */
+    PlanQueryResult getActivePlans();
 }

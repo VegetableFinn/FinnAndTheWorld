@@ -16,9 +16,15 @@ import com.assistant.utils.ResultHelper;
  * @version $Id: SpringMVCInterceptor, v 0.1 16/4/23 17:57 hefan.hf Exp $
  */
 public class SpringMVCInterceptor implements HandlerInterceptor {
+
+    private static boolean isDev = false;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest,
                              HttpServletResponse httpServletResponse, Object o) throws Exception {
+        if (isDev) {
+            return true;
+        }
         if (httpServletRequest.getSession().getAttribute("user") == null) {
             httpServletResponse.setContentType("text/x-json;charset=UTF-8");
             httpServletResponse.setHeader("Cache-Control", "no-cache");
