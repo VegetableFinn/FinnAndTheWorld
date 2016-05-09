@@ -1,15 +1,22 @@
 package com.assistant.service.impl;
 
+import java.net.URLDecoder;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.assistant.db.model.SaySomething;
 import com.assistant.models.enums.ErrorMessageEnum;
 import com.assistant.models.result.BaseServiceResult;
+import com.assistant.service.SaySomethingService;
 import com.assistant.utils.ResultHelper;
+import com.assistant.utils.StringUtil;
 
 /**
  * @author hefan.hf
@@ -17,7 +24,10 @@ import com.assistant.utils.ResultHelper;
  */
 public class SpringMVCInterceptor implements HandlerInterceptor {
 
-    private static boolean isDev = false;
+    private static boolean      isDev = false;
+
+    @Autowired
+    private SaySomethingService saySomethingService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest,
@@ -25,7 +35,28 @@ public class SpringMVCInterceptor implements HandlerInterceptor {
         if (isDev) {
             return true;
         }
+
         if (httpServletRequest.getSession().getAttribute("user") == null) {
+
+            String loginAccount = "";
+            Cookie[] cookies = httpServletRequest.getCookies();//这样便可以获取一个cookie数组
+            for (Cookie cookie : cookies) {
+                if (StringUtil.equals(cookie.getName(), "user")) {
+                    loginAccount = URLDecoder.decode(cookie.getValue(), "utf-8");
+                    break;
+                }
+            }
+
+            SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
+            if (saySomething != null) {
+                httpServletRequest.getSession().setAttribute("user", "user");
+                return true;
+            }
+
+            Cookie cookie = new Cookie("user", null);
+            cookie.setMaxAge(0);
+            httpServletResponse.addCookie(cookie);
+
             httpServletResponse.setContentType("text/x-json;charset=UTF-8");
             httpServletResponse.setHeader("Cache-Control", "no-cache");
 

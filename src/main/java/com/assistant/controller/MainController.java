@@ -1,5 +1,9 @@
 package com.assistant.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,12 +42,15 @@ public class MainController extends BaseController {
 
     @RequestMapping(value = "/login")
     public @ResponseBody BaseServiceResult login(HttpServletRequest re,
-                                                 HttpServletResponse response, String loginAccount) {
+                                                 HttpServletResponse response, String loginAccount)
+                                                                                                   throws UnsupportedEncodingException {
         BaseServiceResult result = new BaseServiceResult();
         SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
         if (saySomething == null) {
             ResultHelper.fillFailure(result, ErrorMessageEnum.LOGIN_FAIL);
         } else {
+            Cookie cookie = new Cookie("user", URLEncoder.encode(loginAccount, "utf-8"));
+            response.addCookie(cookie);
             re.getSession().setAttribute("user", "user");
         }
         return result;
