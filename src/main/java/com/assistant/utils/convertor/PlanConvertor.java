@@ -28,9 +28,14 @@ public class PlanConvertor {
         } else {
             model.setFinished(false);
         }
+        if (StringUtil.equals(plan.getUnit(), PlanUnitEnum.MINUTE.getCode())) {
+            model.setProgress(NumberUtil.preserveOneDigit(plan.getCurrent()) + " / "
+                              + plan.getTotal() / 60 + " " + PlanUnitEnum.HOUR.getDescription());
+        } else {
+            model.setProgress(plan.getCurrent() + " / " + plan.getTotal() + " "
+                              + PlanUnitEnum.getByCode(plan.getUnit()).getDescription());
+        }
 
-        model.setProgress(plan.getCurrent() + " / " + plan.getTotal() + " "
-                          + PlanUnitEnum.getByCode(plan.getUnit()).getDescription());
         model.setPercent(NumberUtil.getPercent(plan.getCurrent(), plan.getTotal()));
         return model;
     }

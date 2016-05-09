@@ -15,4 +15,11 @@ public class NumberUtil {
         String result = numberFormat.format((float) i1 / (float) i2 * 100) + " %";
         return result;
     }
+
+    public static String preserveOneDigit(int i) {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(1);
+        String result = numberFormat.format((float) i / 60);
+        return result;
+    }
 }

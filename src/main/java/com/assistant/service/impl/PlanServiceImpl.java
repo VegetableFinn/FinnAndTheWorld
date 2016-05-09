@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import com.assistant.db.dao.PlanMapper;
 import com.assistant.db.model.Plan;
 import com.assistant.models.enums.ErrorMessageEnum;
+import com.assistant.models.enums.PlanUnitEnum;
 import com.assistant.models.enums.TrueFalseEnum;
 import com.assistant.models.result.BaseServiceResult;
 import com.assistant.models.result.PlanQueryResult;
 import com.assistant.service.PlanService;
 import com.assistant.utils.DateUtil;
 import com.assistant.utils.ResultHelper;
+import com.assistant.utils.StringUtil;
 import com.assistant.utils.convertor.PlanConvertor;
 
 /**
@@ -41,8 +43,13 @@ public class PlanServiceImpl extends BaseService implements PlanService {
             plan.setGmtCreate(now);
             plan.setCurrent(0);
             plan.setIsFinished(TrueFalseEnum.FALSE.getCode());
-            plan.setTotal(total);
-            plan.setUnit(unit);
+            if (StringUtil.equals(unit, PlanUnitEnum.HOUR.getCode())) {
+                plan.setTotal(total * 60);
+                plan.setUnit(PlanUnitEnum.MINUTE.getCode());
+            } else {
+                plan.setTotal(total);
+                plan.setUnit(unit);
+            }
             plan.setStartDt(DateUtil.convertFromPlanDtStart(startDt));
             plan.setEndDt(DateUtil.convertFromPlanDtEnd(endDt));
             planMapper.insert(plan);

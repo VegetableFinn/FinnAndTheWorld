@@ -8,6 +8,9 @@ import com.assistant.utils.StringUtil;
  */
 public enum PlanUnitEnum {
 
+    /** 分钟 */
+    MINUTE("M", "分钟"),
+
     /** 小时 */
     HOUR("H", "小时"),
 
