@@ -31,7 +31,6 @@ public class FileServiceImpl extends BaseService implements FileService {
 
         String filePath = FileUtil.getOnePicFolder() + one.getTitle() + ".jpg";
         one.setImgAddr(filePath);
-        logger.debug(filePath);
 
         // 下载网络文件
         int bytesum = 0;
@@ -45,8 +44,13 @@ public class FileServiceImpl extends BaseService implements FileService {
                 return result;
             }
 
+            logger.info("开始下载ONE图片.");
+
             URL url = new URL(one.getImgUrl());
             URLConnection conn = url.openConnection();
+            //设置超时时间
+            conn.setReadTimeout(120000);
+            conn.setConnectTimeout(5000);
             InputStream inStream = conn.getInputStream();
             FileOutputStream fs = new FileOutputStream(filePath);
 
@@ -63,6 +67,9 @@ public class FileServiceImpl extends BaseService implements FileService {
             logger.error("下载ONE图片时出错." + one, e);
             ResultHelper.fillFailure(result, ErrorMessageEnum.UNKNOWN_EXCEPTION);
         } catch (IOException e) {
+            logger.error("下载ONE图片时出错." + one, e);
+            ResultHelper.fillFailure(result, ErrorMessageEnum.UNKNOWN_EXCEPTION);
+        } catch (Exception e) {
             logger.error("下载ONE图片时出错." + one, e);
             ResultHelper.fillFailure(result, ErrorMessageEnum.UNKNOWN_EXCEPTION);
         }
