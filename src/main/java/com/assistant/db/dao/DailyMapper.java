@@ -19,4 +19,6 @@ public interface DailyMapper {
 
     List<Daily> selectRecent2DaysDesc();
 
+    Daily selectByContent(Daily record);
+
 }

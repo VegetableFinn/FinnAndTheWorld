@@ -33,4 +33,9 @@ public class PlanController extends BaseController {
         return planService.getActivePlans();
     }
 
+    @RequestMapping("/startPlan")
+    public @ResponseBody BaseServiceResult startPlan(int id) {
+        return planService.startPlan(id);
+    }
+
 }

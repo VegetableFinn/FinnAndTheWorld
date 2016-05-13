@@ -20,6 +20,13 @@
         from daily
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectByContent" resultMap="BaseResultMap" parameterType="com.assistant.db.model.Daily">
+        select
+        <include refid="Base_Column_List"/>
+        from daily
+        where is_duration = #{isDuration,jdbcType=CHAR} and content = #{content,jdbcType=VARCHAR} and catagory =
+        #{catagory,jdbcType=VARCHAR} and end_dt is null
+    </select>
     <select id="selectRecent2DaysDesc" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -28,9 +35,9 @@
         order by start_dt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from daily
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from daily
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.assistant.db.model.Daily">
     insert into daily (id, content, start_dt,
       end_dt, is_duration, catagory,
@@ -122,14 +129,14 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.assistant.db.model.Daily">
-    update daily
-    set content = #{content,jdbcType=VARCHAR},
-      start_dt = #{startDt,jdbcType=TIMESTAMP},
-      end_dt = #{endDt,jdbcType=TIMESTAMP},
-      is_duration = #{isDuration,jdbcType=CHAR},
-      catagory = #{catagory,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update daily
+        set content = #{content,jdbcType=VARCHAR},
+        start_dt = #{startDt,jdbcType=TIMESTAMP},
+        end_dt = #{endDt,jdbcType=TIMESTAMP},
+        is_duration = #{isDuration,jdbcType=CHAR},
+        catagory = #{catagory,jdbcType=VARCHAR},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

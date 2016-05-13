@@ -1,5 +1,6 @@
 package com.assistant.service;
 
+import com.assistant.db.model.Daily;
 import com.assistant.models.result.BaseServiceResult;
 import com.assistant.models.result.DailyQueryResult;
 
@@ -18,4 +19,6 @@ public interface DailyService {
     BaseServiceResult editDaily(String type, String content, int id);
 
     BaseServiceResult deleteDaily(int id);
+
+    Daily selectByContent(Daily record);
 }

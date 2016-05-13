@@ -12,18 +12,19 @@
         <result column="is_finished" property="isFinished" jdbcType="CHAR"/>
         <result column="start_dt" property="startDt" jdbcType="TIMESTAMP"/>
         <result column="end_dt" property="endDt" jdbcType="TIMESTAMP"/>
+        <result column="daily_id" property="dailyId" jdbcType="INTEGER"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, content, total, current, unit, gmt_create, gmt_modified, is_finished,
-    start_dt, end_dt
-  </sql>
+        id, content, total, current, unit, gmt_create, gmt_modified, is_finished,
+        start_dt, end_dt, daily_id, category
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from plan
         where id = #{id,jdbcType=INTEGER}
     </select>
-
     <select id="selectActivePlans" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -31,18 +32,18 @@
         where now() &gt;= start_dt and now() &lt;= end_dt
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from plan
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from plan
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.assistant.db.model.Plan">
     insert into plan (id, content,
       total, current, unit,
       gmt_create, gmt_modified, is_finished,
-      start_dt, end_dt)
+      start_dt, end_dt, daily_id, category)
     values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
       #{total,jdbcType=INTEGER}, #{current,jdbcType=INTEGER}, #{unit,jdbcType=CHAR},
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{isFinished,jdbcType=CHAR},
-      #{startDt,jdbcType=TIMESTAMP}, #{endDt,jdbcType=TIMESTAMP})
+      #{startDt,jdbcType=TIMESTAMP}, #{endDt,jdbcType=TIMESTAMP},#{dailyId,jdbcType=INTEGER},#{category,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.assistant.db.model.Plan">
         insert into plan
@@ -77,6 +78,12 @@
             <if test="endDt != null">
                 end_dt,
             </if>
+            <if test="dailyId != null">
+                daily_id,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -108,6 +115,12 @@
             </if>
             <if test="endDt != null">
                 #{endDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dailyId != null">
+                #{dailyId,jdbcType=INTEGER},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -141,20 +154,28 @@
             <if test="endDt != null">
                 end_dt = #{endDt,jdbcType=TIMESTAMP},
             </if>
+            <if test="dailyId != null">
+                daily_id = #{dailyId,jdbcType=INTEGER},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.assistant.db.model.Plan">
-    update plan
-    set content = #{content,jdbcType=VARCHAR},
-      total = #{total,jdbcType=INTEGER},
-      current = #{current,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=CHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      is_finished = #{isFinished,jdbcType=CHAR},
-      start_dt = #{startDt,jdbcType=TIMESTAMP},
-      end_dt = #{endDt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update plan
+        set content = #{content,jdbcType=VARCHAR},
+        total = #{total,jdbcType=INTEGER},
+        current = #{current,jdbcType=INTEGER},
+        unit = #{unit,jdbcType=CHAR},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        is_finished = #{isFinished,jdbcType=CHAR},
+        start_dt = #{startDt,jdbcType=TIMESTAMP},
+        end_dt = #{endDt,jdbcType=TIMESTAMP},
+        daily_id = #{dailyId,jdbcType=INTEGER},
+        category = #{category,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

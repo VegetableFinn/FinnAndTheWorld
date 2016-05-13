@@ -23,6 +23,10 @@ public class Plan {
 
     private Date    endDt;
 
+    private int     dailyId;
+
+    private String  category;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +105,43 @@ public class Plan {
 
     public void setEndDt(Date endDt) {
         this.endDt = endDt;
+    }
+
+    /**
+     * Getter method for property <tt>dailyId</tt>.
+     *
+     * @return property value of dailyId
+     */
+
+    public int getDailyId() {
+        return dailyId;
+    }
+
+    /**
+     * Setter method for property <tt>dailyId</tt>.
+     *
+     * @param dailyId value to be assigned to property dailyId
+     */
+    public void setDailyId(int dailyId) {
+        this.dailyId = dailyId;
+    }
+
+    /**
+     * Getter method for property <tt>category</tt>.
+     *
+     * @return property value of category
+     */
+
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Setter method for property <tt>category</tt>.
+     *
+     * @param category value to be assigned to property category
+     */
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

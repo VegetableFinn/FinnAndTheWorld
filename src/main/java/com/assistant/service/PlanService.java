@@ -25,4 +25,11 @@ public interface PlanService {
      * @return
      */
     PlanQueryResult getActivePlans();
+
+    /**
+     * 执行一次计划
+     * @param id
+     * @return
+     */
+    BaseServiceResult startPlan(int id);
 }

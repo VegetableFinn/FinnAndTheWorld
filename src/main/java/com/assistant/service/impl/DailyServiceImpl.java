@@ -94,7 +94,7 @@ public class DailyServiceImpl extends BaseService implements DailyService {
         daily.setGmtModified(now);
         daily.setStartDt(now);
 
-        dailyMapper.insert(daily);
+        int i = dailyMapper.insert(daily);
 
         return result;
     }
@@ -116,5 +116,10 @@ public class DailyServiceImpl extends BaseService implements DailyService {
         BaseServiceResult result = new BaseServiceResult();
         dailyMapper.deleteByPrimaryKey(id);
         return result;
+    }
+
+    @Override
+    public Daily selectByContent(Daily record) {
+        return dailyMapper.selectByContent(record);
     }
 }
