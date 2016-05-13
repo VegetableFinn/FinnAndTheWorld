@@ -18,7 +18,7 @@ public interface PlanService {
      * @param unit
      * @return
      */
-    BaseServiceResult add(String content, int total, String unit, Date startDt, Date endDt);
+    BaseServiceResult add(String content, int total, String unit, Date startDt, Date endDt, String category);
 
     /**
      * 获取生效计划

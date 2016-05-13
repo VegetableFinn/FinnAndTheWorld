@@ -37,7 +37,8 @@ public class PlanServiceImpl extends BaseService implements PlanService {
     private DailyService dailyService;
 
     @Override
-    public BaseServiceResult add(String content, int total, String unit, Date startDt, Date endDt) {
+    public BaseServiceResult add(String content, int total, String unit, Date startDt, Date endDt,
+                                 String category) {
         BaseServiceResult result = new BaseServiceResult();
 
         try {
@@ -58,6 +59,8 @@ public class PlanServiceImpl extends BaseService implements PlanService {
             }
             plan.setStartDt(DateUtil.convertFromPlanDtStart(startDt));
             plan.setEndDt(DateUtil.convertFromPlanDtEnd(endDt));
+            plan.setCategory(category);
+            plan.setDailyId(-1);
             planMapper.insert(plan);
         } catch (ParseException e) {
             e.printStackTrace();

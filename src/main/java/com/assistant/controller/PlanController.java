@@ -24,8 +24,8 @@ public class PlanController extends BaseController {
 
     @RequestMapping("/addPlan")
     public @ResponseBody BaseServiceResult addPlan(String content, int total, String unit,
-                                                   Date startDt, Date endDt) {
-        return planService.add(content, total, unit, startDt, endDt);
+                                                   Date startDt, Date endDt, String category) {
+        return planService.add(content, total, unit, startDt, endDt, category);
     }
 
     @RequestMapping("/getActivePlans")
