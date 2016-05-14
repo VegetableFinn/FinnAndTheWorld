@@ -22,6 +22,8 @@ public class PlanModel {
 
     private Boolean isRuning;
 
+    private String  category;
+
     /**
      * Getter method for property <tt>id</tt>.
      *
@@ -174,18 +176,22 @@ public class PlanModel {
         isRuning = runing;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("PlanModel{");
-        sb.append("id=").append(id);
-        sb.append(", content='").append(content).append('\'');
-        sb.append(", isFinished=").append(isFinished);
-        sb.append(", startDt='").append(startDt).append('\'');
-        sb.append(", endDt='").append(endDt).append('\'');
-        sb.append(", progress='").append(progress).append('\'');
-        sb.append(", percent='").append(percent).append('\'');
-        sb.append(", isRuning=").append(isRuning);
-        sb.append('}');
-        return sb.toString();
+    /**
+     * Getter method for property <tt>category</tt>.
+     *
+     * @return property value of category
+     */
+
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Setter method for property <tt>category</tt>.
+     *
+     * @param category value to be assigned to property category
+     */
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

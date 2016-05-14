@@ -44,6 +44,8 @@ public class PlanConvertor {
             model.setRuning(true);
         }
 
+        model.setCategory(plan.getCategory());
+
         return model;
     }
 
