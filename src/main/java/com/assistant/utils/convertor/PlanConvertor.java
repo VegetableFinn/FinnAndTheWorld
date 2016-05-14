@@ -37,6 +37,13 @@ public class PlanConvertor {
         }
 
         model.setPercent(NumberUtil.getPercent(plan.getCurrent(), plan.getTotal()));
+
+        if (plan.getDailyId() == 0 || plan.getDailyId() == -1) {
+            model.setRuning(false);
+        } else {
+            model.setRuning(true);
+        }
+
         return model;
     }
 

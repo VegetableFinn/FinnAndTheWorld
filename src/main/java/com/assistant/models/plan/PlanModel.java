@@ -20,6 +20,8 @@ public class PlanModel {
 
     private String  percent;
 
+    private Boolean isRuning;
+
     /**
      * Getter method for property <tt>id</tt>.
      *
@@ -153,6 +155,25 @@ public class PlanModel {
         this.percent = percent;
     }
 
+    /**
+     * Getter method for property <tt>isRuning</tt>.
+     *
+     * @return property value of isRuning
+     */
+
+    public Boolean getRuning() {
+        return isRuning;
+    }
+
+    /**
+     * Setter method for property <tt>isRuning</tt>.
+     *
+     * @param isRuning value to be assigned to property isRuning
+     */
+    public void setRuning(Boolean runing) {
+        isRuning = runing;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("PlanModel{");
@@ -163,6 +184,7 @@ public class PlanModel {
         sb.append(", endDt='").append(endDt).append('\'');
         sb.append(", progress='").append(progress).append('\'');
         sb.append(", percent='").append(percent).append('\'');
+        sb.append(", isRuning=").append(isRuning);
         sb.append('}');
         return sb.toString();
     }
