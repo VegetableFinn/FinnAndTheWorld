@@ -48,8 +48,12 @@ public class MainController extends BaseController {
         SaySomething saySomething = saySomethingService.getSomethingByTrigger(loginAccount);
         if (saySomething == null) {
             ResultHelper.fillFailure(result, ErrorMessageEnum.LOGIN_FAIL);
+            Cookie cookie = new Cookie("user", null);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
         } else {
             Cookie cookie = new Cookie("user", URLEncoder.encode(loginAccount, "utf-8"));
+            cookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(cookie);
             re.getSession().setAttribute("user", "user");
         }
